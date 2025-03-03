@@ -8,4 +8,4 @@ Beijing Institute of Technology
 #### Research Interests  
 AGI,Autonomous Driving
 
-![Visitor Count](https://komarev.com/ghpvc/?username=yenanfei&color=green)
+![Visitor Count](https://komarev.com/ghpvc/?username=yenanfei&style=for-the-badge)
