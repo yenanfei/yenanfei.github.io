@@ -3,3 +3,5 @@
 - The robodrive challenge: Drive anytime anywhere in any condition
 
 - ModaLink: Unifying Modalities for Efficient Image-to-PointCloud Place Recognition
+
+- DriveAgent-R1: Advancing VLM-based Autonomous Driving with Hybrid Thinking and Active Perception
