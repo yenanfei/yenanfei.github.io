@@ -1,0 +1,38 @@
+{
+  "user": "Jo7TvUMAAAAJ",
+  "url": "https://scholar.google.com/citations?user=Jo7TvUMAAAAJ&hl=en",
+  "updated": "2026-09-19T11:30:42Z",
+  "citations": 169,
+  "citations_recent": 169,
+  "h_index": 4,
+  "h_index_recent": 4,
+  "i10_index": 4,
+  "i10_index_recent": 4,
+  "papers": [
+    {
+      "title": "The robodrive challenge: Drive anytime anywhere in any condition",
+      "citations": 72,
+      "year": 2024
+    },
+    {
+      "title": "Operational characteristics of mixed-autonomy traffic flow on the freeway with on-and off-ramps and weaving sections: An RL-based approach",
+      "citations": 60,
+      "year": 2021
+    },
+    {
+      "title": "DriveAgent-R1: Advancing VLM-based Autonomous Driving with Active Perception and Hybrid Thinking",
+      "citations": 25,
+      "year": 2025
+    },
+    {
+      "title": "Modalink: Unifying modalities for efficient image-to-pointcloud place recognition",
+      "citations": 12,
+      "year": 2024
+    },
+    {
+      "title": "CRAFT: Counterfactual-to-Interactive Reinforcement Fine-Tuning for Driving Policies",
+      "citations": 0,
+      "year": 2026
+    }
+  ]
+}
