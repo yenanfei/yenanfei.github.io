@@ -30,15 +30,28 @@ function titlesMatch(pageTitle, scholarTitle) {
 
 
 function publicationTitle(li) {
+    if (li.dataset.title) {
+        return li.dataset.title;
+    }
     const clone = li.cloneNode(true);
-    clone.querySelectorAll('.pub-cited').forEach(node => node.remove());
+    clone.querySelectorAll('.pub-cite, .pub-actions').forEach(node => node.remove());
     clone.querySelectorAll('a').forEach(anchor => {
-        const label = anchor.textContent.trim().replace(/^\[|\]$/g, '');
-        if (/^(paper|demo|code|pdf|arxiv|doi)$/i.test(label)) {
+        const label = chipLabel(anchor);
+        if (isChipLink(anchor)) {
             anchor.remove();
         }
     });
     return clone.textContent.replace(/\s+/g, ' ').trim();
+}
+
+
+function chipLabel(anchor) {
+    return (anchor.textContent || '').trim().replace(/^\[|\]$/g, '');
+}
+
+
+function isChipLink(anchor) {
+    return /^(paper|demo|code|pdf|arxiv|doi|scholar|project)$/i.test(chipLabel(anchor));
 }
 
 
@@ -65,29 +78,129 @@ function renderScholarMetrics(data) {
 }
 
 
+function formatPublicationList() {
+    const list = document.querySelector('#publications-md ul, #publications-md ol');
+    if (!list) {
+        return;
+    }
+    list.classList.add('pub-list');
+    Array.from(list.children).forEach(li => {
+        if (li.tagName !== 'LI' || li.dataset.formatted === '1') {
+            return;
+        }
+        const source = li.querySelector('p') || li;
+        const links = Array.from(source.querySelectorAll('a'));
+        const titleLink = links.find(anchor => !isChipLink(anchor)) || links[0];
+        const chips = links.filter(anchor => isChipLink(anchor));
+        const titleText = titleLink ? titleLink.textContent.trim() : publicationTitle(li);
+        let venue = source.textContent.replace(/\s+/g, ' ').trim();
+        if (titleText) {
+            venue = venue.replace(titleText, '');
+        }
+        chips.forEach(chip => {
+            venue = venue.replace(chipLabel(chip), '');
+        });
+        venue = venue.replace(/[\[\]]/g, '').replace(/^[\s.,;:·-]+/, '').replace(/[\s.,;:·-]+$/, '').trim();
+
+        const card = document.createElement('article');
+        card.className = 'pub-card';
+
+        if (titleLink) {
+            const title = document.createElement('a');
+            title.className = 'pub-title';
+            title.href = titleLink.href;
+            title.target = '_blank';
+            title.rel = 'noopener';
+            title.textContent = titleText;
+            card.appendChild(title);
+        } else {
+            const title = document.createElement('div');
+            title.className = 'pub-title';
+            title.textContent = titleText;
+            card.appendChild(title);
+        }
+
+        if (venue) {
+            const venueEl = document.createElement('p');
+            venueEl.className = 'pub-venue';
+            venueEl.textContent = venue;
+            card.appendChild(venueEl);
+        }
+
+        const actions = document.createElement('div');
+        actions.className = 'pub-actions';
+        chips.forEach(chip => {
+            const next = document.createElement('a');
+            next.className = 'pub-chip';
+            if (chipLabel(chip).toLowerCase() === 'demo') {
+                next.classList.add('pub-chip-demo');
+            }
+            next.href = chip.href;
+            next.target = '_blank';
+            next.rel = 'noopener';
+            next.textContent = chipLabel(chip);
+            actions.appendChild(next);
+        });
+        card.appendChild(actions);
+
+        li.innerHTML = '';
+        li.appendChild(card);
+        li.dataset.formatted = '1';
+        li.dataset.title = titleText;
+    });
+}
+
+
 function annotatePublications(data) {
     const root = document.getElementById('publications-md');
     if (!root || !data || !Array.isArray(data.papers)) {
         return;
     }
+    formatPublicationList();
     root.querySelectorAll('li').forEach(li => {
         const title = publicationTitle(li);
         const match = data.papers.find(paper => titlesMatch(title, paper.title));
-        li.querySelectorAll('.pub-cited').forEach(node => node.remove());
+        li.querySelectorAll('.pub-cite').forEach(node => node.remove());
         if (!match || !match.citations) {
             return;
         }
-        const cited = document.createElement('span');
-        cited.className = 'pub-cited';
+        const actions = li.querySelector('.pub-actions');
+        if (!actions) {
+            return;
+        }
         const link = document.createElement('a');
-        link.href = data.url || 'https://scholar.google.com/citations?user=Jo7TvUMAAAAJ';
+        link.className = 'pub-cite';
+        link.href = match.cited_by_url || match.scholar_url || data.url || 'https://scholar.google.com/citations?user=Jo7TvUMAAAAJ';
         link.target = '_blank';
         link.rel = 'noopener';
         link.textContent = `Cited by ${match.citations}`;
-        cited.appendChild(link);
-        const para = li.querySelector('p:last-of-type') || li;
-        para.appendChild(cited);
+        actions.appendChild(link);
     });
+    sortPublications(data);
+}
+
+
+function sortPublications(data) {
+    const list = document.querySelector('#publications-md ul, #publications-md ol');
+    if (!list || !data || !Array.isArray(data.papers)) {
+        return;
+    }
+    const unmatched = [];
+    const matched = [];
+    Array.from(list.children).forEach(li => {
+        if (li.tagName !== 'LI') {
+            return;
+        }
+        const title = publicationTitle(li);
+        const paper = data.papers.find(item => titlesMatch(title, item.title));
+        if (paper) {
+            matched.push({ li, citations: paper.citations || 0 });
+        } else {
+            unmatched.push(li);
+        }
+    });
+    matched.sort((a, b) => b.citations - a.citations);
+    unmatched.concat(matched.map(item => item.li)).forEach(li => list.appendChild(li));
 }
 
 
@@ -150,6 +263,9 @@ window.addEventListener('DOMContentLoaded', event => {
             .then(markdown => {
                 const html = marked.parse(markdown);
                 document.getElementById(name + '-md').innerHTML = html;
+                if (name === 'publications') {
+                    formatPublicationList();
+                }
                 applyScholarStats();
             }).then(() => {
                 // MathJax

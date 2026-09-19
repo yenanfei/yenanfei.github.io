@@ -3,10 +3,20 @@
 
 :root{
     --h-title-color:#3948d2;
+    --page-ink:#1d2433;
+    --page-muted:#667085;
+    --page-line:#e4e8f1;
+    --chip-bg:#eef1ff;
+}
+
+body {
+    color: var(--page-ink);
 }
 
 .header {
-    border-bottom: solid 2px var(--bs-blue);
+    border-bottom: solid 1px var(--page-line);
+    background: rgba(255, 255, 255, 0.92) !important;
+    backdrop-filter: blur(12px);
     z-index: 10000;
 }
 
@@ -16,14 +26,17 @@
 
 .top-section {
     position: relative;
-    padding: 10rem 0;
+    padding: 10rem 0 7.5rem;
     background-position: center;
     background-size: cover;
-    height: 25rem;
+    height: auto;
+    min-height: 22rem;
 }
 
 .top-section h2 {
     font-weight: 400;
+    max-width: 14ch;
+    text-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
 }
 
 .top-section .top-section-content {
@@ -38,20 +51,230 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.28) 0%, rgba(0, 0, 0, 0.55) 100%);
+}
+
+section {
+    padding-top: 2.8rem;
+    padding-bottom: 3.2rem;
 }
 
 section header h2{
     font-family: "Kanit", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
     color: var(--h-title-color);
-    font-size: 2.3rem;
-    line-height: 4rem;
+    font-size: 2rem;
+    line-height: 1.2;
+    margin-bottom: 1.4rem;
 }
 
 section .main-body{
-    font-size: 1.3rem;
-    font-weight: 200;
-    line-height: 2.4rem;
+    font-size: 1.12rem;
+    font-weight: 400;
+    line-height: 1.75;
+    color: #2d3648;
+}
+
+.profile {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 2rem 2.5rem;
+    align-items: start;
+}
+
+#home-subtitle {
+    font-size: 2.15rem;
+    margin-bottom: 0.85rem;
+}
+
+#home-md img {
+    height: 34px;
+    margin: 0 0.45rem 0.55rem 0;
+    border-radius: 6px;
+}
+
+#home-md h4 {
+    margin: 1.35rem 0 0.45rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--page-muted);
+}
+
+#experience-md h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--page-ink);
+    margin-bottom: 0.75rem;
+}
+
+#experience-md h4 {
+    display: inline-block;
+    margin: 0 0.45rem 0.45rem 0;
+    padding: 0.28rem 0.85rem;
+    border: 1px solid var(--page-line);
+    border-radius: 999px;
+    background: #fff;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #344054;
+}
+
+.scholar-metrics {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    gap: 0.65rem;
+    margin: 1rem 0 0.4rem;
+}
+
+.scholar-metrics[hidden] {
+    display: none;
+}
+
+.scholar-metric {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 7.2rem;
+    padding: 0.55rem 0.85rem 0.5rem;
+    border: 1px solid var(--page-line);
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: 0 8px 20px rgba(28, 39, 76, 0.05);
+    color: var(--h-title-color) !important;
+    text-decoration: none !important;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.scholar-metric:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 12px 24px rgba(57, 72, 210, 0.12);
+}
+
+.scholar-metric .label {
+    color: var(--page-muted);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-right: 0;
+}
+
+.scholar-metric .n {
+    font-size: 1.35rem;
+    font-weight: 700;
+    line-height: 1.2;
+    font-variant-numeric: tabular-nums;
+}
+
+.scholar-updated {
+    align-self: center;
+    color: #98a2b3;
+    font-size: 0.78rem;
+    font-weight: 400;
+    padding-left: 0.2rem;
+}
+
+.pub-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 0.9rem;
+}
+
+.pub-list > li {
+    margin: 0;
+    padding: 0;
+}
+
+.pub-card {
+    display: grid;
+    gap: 0.45rem;
+    padding: 1.05rem 1.15rem 1rem;
+    border: 1px solid var(--page-line);
+    border-radius: 16px;
+    background: #fff;
+    box-shadow: 0 10px 24px rgba(28, 39, 76, 0.05);
+}
+
+.pub-title {
+    color: var(--h-title-color) !important;
+    font-size: 1.08rem;
+    font-weight: 700 !important;
+    line-height: 1.45;
+    text-decoration: none !important;
+}
+
+.pub-title:hover {
+    text-decoration: underline !important;
+}
+
+.pub-venue {
+    margin: 0;
+    color: var(--page-muted);
+    font-size: 0.92rem;
+    font-weight: 500;
+    line-height: 1.45;
+}
+
+.pub-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 0.25rem;
+}
+
+.pub-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.12rem 0.6rem;
+    border-radius: 999px;
+    border: 1px solid rgba(57, 72, 210, 0.18);
+    background: var(--chip-bg);
+    color: var(--h-title-color) !important;
+    font-size: 0.72rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    text-decoration: none !important;
+}
+
+.pub-chip:hover {
+    background: var(--h-title-color);
+    color: #fff !important;
+    text-decoration: none !important;
+}
+
+.pub-chip-demo {
+    background: #e8fbf4;
+    border-color: rgba(14, 159, 110, 0.2);
+    color: #0f7a56 !important;
+}
+
+.pub-chip-demo:hover {
+    background: #0f7a56;
+    color: #fff !important;
+}
+
+.pub-cite {
+    margin-left: auto;
+    padding: 0.14rem 0.65rem;
+    border-radius: 999px;
+    background: #f3f4f7;
+    color: #344054 !important;
+    font-size: 0.8rem !important;
+    font-weight: 700 !important;
+    text-decoration: none !important;
+    white-space: nowrap;
+}
+
+.pub-cite:hover {
+    background: #e8ebf4;
+    color: var(--h-title-color) !important;
+    text-decoration: none !important;
 }
 
 #publications-md a {
@@ -64,68 +287,17 @@ section .main-body{
     text-decoration: underline;
 }
 
-.scholar-metrics {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    gap: 0.35rem 1.35rem;
-    margin: 0.85rem 0 1.25rem;
-    font-size: 1.05rem;
-}
-
-.scholar-metrics[hidden] {
-    display: none;
-}
-
-.scholar-metric {
-    color: var(--h-title-color) !important;
-    text-decoration: none !important;
-    font-weight: 400;
-}
-
-.scholar-metric .label {
-    color: #667085;
-    font-weight: 300;
-    margin-right: 0.4rem;
-}
-
-.scholar-metric .n {
-    font-weight: 700;
-    font-variant-numeric: tabular-nums;
-}
-
-.scholar-updated {
-    color: #98a2b3;
-    font-size: 0.82rem;
-    font-weight: 300;
-}
-
-.pub-cited {
-    margin-left: 0.65rem;
-    font-size: 0.92em;
-    font-weight: 400;
-    white-space: nowrap;
-}
-
-.pub-cited a {
-    color: #667085 !important;
-    font-weight: 500;
-}
-
-.pub-cited a:hover {
-    color: var(--h-title-color) !important;
-}
-
-
 .bg-gradient-primary-to-secondary-light {
-    background: linear-gradient(45deg, #fcfcfc, #ffffff) !important;
+    background: linear-gradient(180deg, #ffffff, #f7f8fb) !important;
+}
+
+.bg-gradient-primary-to-secondary-dark {
+    background: #f7f8fb !important;
 }
 
 .bg-gradient-primary-to-secondary-gray {
-    background: linear-gradient(45deg, #f0f0f0, #f1f1f1) !important;
+    background: #eef1f6 !important;
 }
-
-
 
 .on-top {
     position: relative;
@@ -149,26 +321,46 @@ section .main-body{
     background: rgba(0, 0, 0, 0.4);
 }
 
-
 #avatar {
     position: relative;
-    height: 0;
-    top:min(-65px,max(-100px,calc(-1*100vw/12)));
-    max-width: 55em;
-    margin: 0 1.5rem 0 0;
-    float: right;
-    z-index: 9000;
+    height: auto;
+    float: none;
+    margin: -5.5rem 0 0;
+    z-index: 5;
 }
 
 #avatar img {
-    height: max(130px,min(200px,calc(100vw/6)));
-    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+    display: block;
+    width: 168px;
+    height: 168px;
+    object-fit: cover;
+    border-radius: 22px;
+    border: 4px solid #fff;
+    box-shadow: 0 16px 36px rgba(15, 23, 42, 0.22);
 }
 
 @media screen and (max-width: 991px) {
+    .profile {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        text-align: center;
+    }
+
+    .profile-main {
+        width: 100%;
+    }
+
     #avatar {
-        margin: 0;
+        order: -1;
+        margin: -4.2rem 0 0.4rem;
+    }
+
+    #home-md img {
+        margin-right: 0.35rem;
+        margin-left: 0.35rem;
+    }
+
+    .pub-cite {
+        margin-left: 0;
     }
 }
-
-

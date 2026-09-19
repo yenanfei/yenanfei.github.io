@@ -55,23 +55,41 @@ def fetch_with_retries() -> str:
     raise RuntimeError(f"Failed to fetch Google Scholar profile: {last_error}")
 
 
+def _abs_scholar_url(href: str) -> str:
+    href = unescape(href).replace("&amp;", "&")
+    if href.startswith("/"):
+        return "https://scholar.google.com" + href
+    return href
+
+
+def _parse_anchor_list(html: str, class_pattern: str) -> list[tuple[str, str]]:
+    items = []
+    for match in re.finditer(rf"<a([^>]*{class_pattern}[^>]*)>([^<]*)</a>", html):
+        href_match = re.search(r'href="([^"]*)"', match.group(1))
+        href = _abs_scholar_url(href_match.group(1)) if href_match else ""
+        items.append((unescape(match.group(2)).strip(), href))
+    return items
+
+
 def parse_html(html: str) -> dict:
     cells = [int(n) for n in re.findall(r'class="gsc_rsb_std">(\d+)<', html)]
     if len(cells) < 6:
         raise ValueError("Could not parse citation summary cells")
 
-    titles = [unescape(t).strip() for t in re.findall(r'class="gsc_a_at"[^>]*>([^<]+)', html)]
-    cites_raw = re.findall(r'class="gsc_a_ac[^"]*"[^>]*>([^<]*)</', html)
+    titles = _parse_anchor_list(html, r'class="gsc_a_at"')
+    cites = _parse_anchor_list(html, r'class="gsc_a_ac[^"]*"')
     years = re.findall(r'class="gsc_a_h[^"]*">([^<]*)<', html)
     papers = []
-    for i, title in enumerate(titles):
-        cite_text = cites_raw[i].strip() if i < len(cites_raw) else ""
+    for i, (title, scholar_url) in enumerate(titles):
+        cite_text, cited_by_url = cites[i] if i < len(cites) else ("", "")
         year_text = years[i].strip() if i < len(years) else ""
         papers.append(
             {
                 "title": title,
                 "citations": int(cite_text) if cite_text.isdigit() else 0,
                 "year": int(year_text) if year_text.isdigit() else None,
+                "scholar_url": scholar_url or None,
+                "cited_by_url": cited_by_url or None,
             }
         )
     return summary_payload(cells, papers)
@@ -92,11 +110,21 @@ def parse_markdown(text: str) -> dict:
         text,
     ):
         title, cite, year = row.group(1), row.group(2), row.group(3)
+        scholar_url = re.search(
+            r"https://scholar\.google\.com/citations\?view_op=view_citation[^\)]+",
+            row.group(0),
+        )
+        cited_by = re.search(
+            r"https://scholar\.google\.com/scholar\?oi=bibs[^\)\]]+",
+            row.group(0),
+        )
         papers.append(
             {
                 "title": title.strip(),
                 "citations": int(cite) if cite else 0,
                 "year": int(year),
+                "scholar_url": scholar_url.group(0) if scholar_url else None,
+                "cited_by_url": cited_by.group(0) if cited_by else None,
             }
         )
     cells = [
