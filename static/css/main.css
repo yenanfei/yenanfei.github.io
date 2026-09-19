@@ -173,6 +173,7 @@ section .main-body {
     letter-spacing: -0.03em;
     margin-bottom: 1rem;
     color: var(--ink);
+    text-transform: none;
 }
 
 .name-sep {
@@ -632,6 +633,18 @@ footer.bg-bottom a:hover {
 
     #home-subtitle {
         justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.12rem;
+    }
+
+    .name-sep {
+        display: none;
+    }
+
+    .name-en,
+    .name-zh {
+        white-space: nowrap;
     }
 
     #avatar {
