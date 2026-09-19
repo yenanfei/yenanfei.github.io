@@ -85,7 +85,8 @@ function annotatePublications(data) {
         link.rel = 'noopener';
         link.textContent = `Cited by ${match.citations}`;
         cited.appendChild(link);
-        li.appendChild(cited);
+        const para = li.querySelector('p:last-of-type') || li;
+        para.appendChild(cited);
     });
 }
 
