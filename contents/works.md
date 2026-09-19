@@ -20,19 +20,16 @@
     </article>
 
     <article class="work-card">
-        <div class="work-embed work-embed-demo">
-            <iframe
-                src="https://xs020105-cmad.ms.show/"
-                title="CMAD: RL Training & Drive interactive demo"
-                allow="fullscreen; gamepad"
-                loading="lazy"></iframe>
-        </div>
+        <a class="work-preview" href="https://xs020105-cmad.ms.show/" target="_blank" rel="noopener">
+            <img src="static/assets/img/cmad-preview.svg" alt="CMAD: RL Training &amp; Drive">
+            <span class="work-play" aria-hidden="true"><i class="bi bi-play-fill"></i></span>
+        </a>
         <div class="work-body">
             <p class="work-kicker">Interactive demo</p>
             <h3 class="work-title">CMAD: RL Training &amp; Drive</h3>
-            <p class="work-note">3D Gaussian Splatting driving scene with self-play RL. Click into the demo, then use W/S throttle, A/D steer, Space brake.</p>
+            <p class="work-note">3D Gaussian Splatting driving scene with self-play RL. Opens the full demo in a new tab.</p>
             <a class="work-link" href="https://xs020105-cmad.ms.show/" target="_blank" rel="noopener">
-                <i class="bi bi-box-arrow-up-right" aria-hidden="true"></i> Open full demo
+                <i class="bi bi-box-arrow-up-right" aria-hidden="true"></i> Open demo
             </a>
         </div>
     </article>
