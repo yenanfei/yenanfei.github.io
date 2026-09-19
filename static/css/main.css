@@ -54,6 +54,16 @@ section .main-body{
     line-height: 2.4rem;
 }
 
+#publications-md a {
+    color: var(--h-title-color);
+    font-weight: 500;
+    text-decoration: none;
+}
+
+#publications-md a:hover {
+    text-decoration: underline;
+}
+
 
 .bg-gradient-primary-to-secondary-light {
     background: linear-gradient(45deg, #fcfcfc, #ffffff) !important;
