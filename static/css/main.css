@@ -695,6 +695,38 @@ footer.bg-bottom a:hover {
     color: #fff !important;
 }
 
+.site-stats {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.55rem 1.15rem;
+    margin-top: 0.95rem;
+    color: rgba(215, 222, 248, 0.72);
+    font-size: 0.82rem;
+    font-weight: 650;
+    letter-spacing: 0.03em;
+}
+
+.site-stats[hidden] {
+    display: none;
+}
+
+.site-stat {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.site-stat i {
+    color: #9db0ff;
+}
+
+#vercount_value_site_uv,
+#vercount_value_site_pv {
+    color: #fff;
+    font-variant-numeric: tabular-nums;
+}
+
 .on-top {
     position: relative;
     z-index: 10000;

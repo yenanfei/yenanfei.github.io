@@ -367,7 +367,38 @@ function applyScholarStats() {
 }
 
 
+function watchSiteStats() {
+    const box = document.getElementById('site-stats');
+    const uv = document.getElementById('vercount_value_site_uv');
+    const pv = document.getElementById('vercount_value_site_pv');
+    if (!box || !uv || !pv) {
+        return;
+    }
+    const ready = (el) => /^\d[\d,]*$/.test((el.textContent || '').trim());
+    const reveal = () => {
+        if (ready(uv) && ready(pv)) {
+            box.hidden = false;
+            return true;
+        }
+        return false;
+    };
+    if (reveal()) {
+        return;
+    }
+    const observer = new MutationObserver(() => {
+        if (reveal()) {
+            observer.disconnect();
+        }
+    });
+    observer.observe(uv, { childList: true, characterData: true, subtree: true });
+    observer.observe(pv, { childList: true, characterData: true, subtree: true });
+    setTimeout(() => observer.disconnect(), 10000);
+}
+
+
 window.addEventListener('DOMContentLoaded', event => {
+
+    watchSiteStats();
 
     // Activate Bootstrap scrollspy on the main nav element
     const mainNav = document.body.querySelector('#mainNav');
