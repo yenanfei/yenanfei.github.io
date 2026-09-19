@@ -12,7 +12,7 @@
 </article>
 <article class="work-card">
 <a class="work-preview" href="https://xs020105-cmad.ms.show/" target="_blank" rel="noopener">
-<img src="static/assets/img/cmad-preview.svg" alt="CMAD: RL Training &amp; Drive">
+<img src="static/assets/img/cmad-preview.jpg" alt="CMAD: RL Training &amp; Drive">
 <span class="work-play" aria-hidden="true"><i class="bi bi-play-fill"></i></span>
 </a>
 <div class="work-body">
