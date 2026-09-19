@@ -34,7 +34,7 @@ function publicationTitle(li) {
     clone.querySelectorAll('.pub-cited').forEach(node => node.remove());
     clone.querySelectorAll('a').forEach(anchor => {
         const label = anchor.textContent.trim().replace(/^\[|\]$/g, '');
-        if (/^(paper|demo|code|pdf|arxiv|doi)$/i.test(label)) {
+        if (/^(paper|demo|code|pdf|arxiv|doi|scholar|project)$/i.test(label)) {
             anchor.remove();
         }
     });
@@ -80,7 +80,7 @@ function annotatePublications(data) {
         const cited = document.createElement('span');
         cited.className = 'pub-cited';
         const link = document.createElement('a');
-        link.href = data.url || 'https://scholar.google.com/citations?user=Jo7TvUMAAAAJ';
+        link.href = match.cited_by_url || match.scholar_url || data.url || 'https://scholar.google.com/citations?user=Jo7TvUMAAAAJ';
         link.target = '_blank';
         link.rel = 'noopener';
         link.textContent = `Cited by ${match.citations}`;
@@ -88,6 +88,31 @@ function annotatePublications(data) {
         const para = li.querySelector('p:last-of-type') || li;
         para.appendChild(cited);
     });
+    sortPublications(data);
+}
+
+
+function sortPublications(data) {
+    const list = document.querySelector('#publications-md ul, #publications-md ol');
+    if (!list || !data || !Array.isArray(data.papers)) {
+        return;
+    }
+    const unmatched = [];
+    const matched = [];
+    Array.from(list.children).forEach(li => {
+        if (li.tagName !== 'LI') {
+            return;
+        }
+        const title = publicationTitle(li);
+        const paper = data.papers.find(item => titlesMatch(title, item.title));
+        if (paper) {
+            matched.push({ li, citations: paper.citations || 0 });
+        } else {
+            unmatched.push(li);
+        }
+    });
+    matched.sort((a, b) => b.citations - a.citations);
+    unmatched.concat(matched.map(item => item.li)).forEach(li => list.appendChild(li));
 }
 
 
