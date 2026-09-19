@@ -5,6 +5,17 @@ const scholar_file = 'scholar.json';
 
 let scholarStats = null;
 
+const CHIP_META = {
+    paper: { icon: 'bi-file-earmark-text', cls: '' },
+    demo: { icon: 'bi-play-circle', cls: 'pub-chip-demo' },
+    code: { icon: 'bi-github', cls: 'pub-chip-code' },
+    pdf: { icon: 'bi-file-earmark-pdf', cls: '' },
+    arxiv: { icon: 'bi-archive', cls: '' },
+    doi: { icon: 'bi-journal-text', cls: '' },
+    scholar: { icon: 'bi-quote', cls: '' },
+    project: { icon: 'bi-link-45deg', cls: '' },
+};
+
 
 function normalizeTitle(text) {
     return (text || '')
@@ -34,9 +45,8 @@ function publicationTitle(li) {
         return li.dataset.title;
     }
     const clone = li.cloneNode(true);
-    clone.querySelectorAll('.pub-cite, .pub-actions').forEach(node => node.remove());
+    clone.querySelectorAll('.pub-cite, .pub-actions, .pub-year').forEach(node => node.remove());
     clone.querySelectorAll('a').forEach(anchor => {
-        const label = chipLabel(anchor);
         if (isChipLink(anchor)) {
             anchor.remove();
         }
@@ -52,6 +62,146 @@ function chipLabel(anchor) {
 
 function isChipLink(anchor) {
     return /^(paper|demo|code|pdf|arxiv|doi|scholar|project)$/i.test(chipLabel(anchor));
+}
+
+
+function extractYear(text) {
+    const match = (text || '').match(/\b(19|20)\d{2}\b/);
+    return match ? match[0] : '';
+}
+
+
+function socialMeta(anchor) {
+    const img = anchor.querySelector('img');
+    const key = ((img && img.alt) || anchor.textContent || '').toLowerCase();
+    if (key.includes('github')) {
+        return { icon: 'bi-github', label: 'GitHub', kind: 'github' };
+    }
+    if (key.includes('scholar')) {
+        return { icon: 'bi-mortarboard', label: 'Scholar', kind: 'scholar' };
+    }
+    if (key.includes('wise')) {
+        return { icon: 'bi-wallet2', label: 'Wise', kind: 'wise' };
+    }
+    if (key.includes('outlook')) {
+        return { icon: 'bi-envelope', label: 'Outlook', kind: 'outlook' };
+    }
+    if (key.includes('gmail')) {
+        return { icon: 'bi-envelope-at', label: 'Gmail', kind: 'gmail' };
+    }
+    return {
+        icon: 'bi-link-45deg',
+        label: (img && img.alt) ? img.alt : 'Link',
+        kind: 'link',
+    };
+}
+
+
+function formatHomeTitle() {
+    const el = document.getElementById('home-subtitle');
+    if (!el || el.dataset.formatted === '1') {
+        return;
+    }
+    const parts = el.textContent.replace(/\u2002/g, ' ').split('|').map(part => part.trim()).filter(Boolean);
+    if (parts.length < 2) {
+        return;
+    }
+    el.innerHTML = `<span class="name-en">${parts[0]}</span><span class="name-sep" aria-hidden="true"></span><span class="name-zh">${parts[1]}</span>`;
+    el.dataset.formatted = '1';
+}
+
+
+function upgradeBadgeLinks(root) {
+    root.querySelectorAll('a').forEach(anchor => {
+        if (!anchor.querySelector('img') || anchor.dataset.chip === '1') {
+            return;
+        }
+        const meta = socialMeta(anchor);
+        const icon = document.createElement('i');
+        icon.className = `bi ${meta.icon}`;
+        const label = document.createElement('span');
+        label.textContent = meta.label;
+        anchor.className = `social-chip social-${meta.kind}`;
+        anchor.replaceChildren(icon, label);
+        if (!anchor.getAttribute('href').startsWith('mailto:')) {
+            anchor.target = '_blank';
+            anchor.rel = 'noopener';
+        }
+        anchor.dataset.chip = '1';
+    });
+}
+
+
+function formatHome() {
+    const root = document.getElementById('home-md');
+    if (!root || root.dataset.formatted === '1') {
+        return;
+    }
+    upgradeBadgeLinks(root);
+    root.querySelectorAll('p').forEach(paragraph => {
+        if (paragraph.querySelector('.social-chip')) {
+            paragraph.classList.add('social-row');
+        }
+    });
+
+    const grid = document.createElement('div');
+    grid.className = 'info-grid';
+    Array.from(root.querySelectorAll('h4')).forEach(heading => {
+        if (/email/i.test(heading.textContent)) {
+            heading.classList.add('info-label');
+            return;
+        }
+        const next = heading.nextElementSibling;
+        const item = document.createElement('div');
+        item.className = 'info-item';
+        const label = document.createElement('div');
+        label.className = 'info-label';
+        label.textContent = heading.textContent.trim();
+        const value = document.createElement('div');
+        value.className = 'info-value';
+        value.textContent = next ? next.textContent.trim() : '';
+        item.append(label, value);
+        grid.appendChild(item);
+        heading.remove();
+        if (next) {
+            next.remove();
+        }
+    });
+    if (grid.children.length) {
+        root.appendChild(grid);
+    }
+    root.dataset.formatted = '1';
+}
+
+
+function formatExperience() {
+    const root = document.getElementById('experience-md');
+    if (!root || root.dataset.formatted === '1') {
+        return;
+    }
+    const role = root.querySelector('h3');
+    const companies = Array.from(root.querySelectorAll('h4'));
+    if (!role) {
+        return;
+    }
+    const card = document.createElement('div');
+    card.className = 'exp-card';
+    const title = document.createElement('div');
+    title.className = 'exp-role';
+    title.textContent = role.textContent.replace(/\*/g, '').trim();
+    const list = document.createElement('div');
+    list.className = 'exp-companies';
+    companies.forEach(company => {
+        const item = document.createElement('span');
+        item.className = 'exp-company';
+        const name = company.textContent.trim();
+        item.textContent = name;
+        item.dataset.company = name.toLowerCase();
+        list.appendChild(item);
+    });
+    card.append(title, list);
+    root.replaceChildren(card);
+    root.dataset.formatted = '1';
 }
 
 
@@ -105,6 +255,11 @@ function formatPublicationList() {
         const card = document.createElement('article');
         card.className = 'pub-card';
 
+        const year = document.createElement('div');
+        year.className = 'pub-year';
+        year.textContent = extractYear(venue) || '—';
+        card.appendChild(year);
+
         if (titleLink) {
             const title = document.createElement('a');
             title.className = 'pub-title';
@@ -130,15 +285,14 @@ function formatPublicationList() {
         const actions = document.createElement('div');
         actions.className = 'pub-actions';
         chips.forEach(chip => {
+            const label = chipLabel(chip).toLowerCase();
+            const meta = CHIP_META[label] || { icon: 'bi-link-45deg', cls: '' };
             const next = document.createElement('a');
-            next.className = 'pub-chip';
-            if (chipLabel(chip).toLowerCase() === 'demo') {
-                next.classList.add('pub-chip-demo');
-            }
+            next.className = `pub-chip ${meta.cls}`.trim();
             next.href = chip.href;
             next.target = '_blank';
             next.rel = 'noopener';
-            next.textContent = chipLabel(chip);
+            next.innerHTML = `<i class="bi ${meta.icon}" aria-hidden="true"></i>${chipLabel(chip)}`;
             actions.appendChild(next);
         });
         card.appendChild(actions);
@@ -250,7 +404,8 @@ window.addEventListener('DOMContentLoaded', event => {
                     console.log("Unknown id and value: " + key + "," + yml[key].toString())
                 }
 
-            })
+            });
+            formatHomeTitle();
         })
         .catch(error => console.log(error));
 
@@ -263,6 +418,12 @@ window.addEventListener('DOMContentLoaded', event => {
             .then(markdown => {
                 const html = marked.parse(markdown);
                 document.getElementById(name + '-md').innerHTML = html;
+                if (name === 'home') {
+                    formatHome();
+                }
+                if (name === 'experience') {
+                    formatExperience();
+                }
                 if (name === 'publications') {
                     formatPublicationList();
                 }
@@ -287,4 +448,4 @@ window.addEventListener('DOMContentLoaded', event => {
         })
         .catch(error => console.log(error));
 
-}); 
+});
