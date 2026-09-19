@@ -2,7 +2,7 @@
     <article class="work-card">
         <div class="work-embed work-embed-video">
             <iframe
-                src="https://www.youtube-nocookie.com/embed/tNpEeIyuiJs?start=468&rel=0"
+                src="https://www.youtube-nocookie.com/embed/tNpEeIyuiJs?start=468&amp;rel=0"
                 title="Momenta at CVPR 2023: How Data-Driven Flywheel Enables Scalable Path to Full Autonomy"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 referrerpolicy="strict-origin-when-cross-origin"
