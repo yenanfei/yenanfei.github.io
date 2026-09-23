@@ -1,9 +1,9 @@
 {
   "user": "Jo7TvUMAAAAJ",
   "url": "https://scholar.google.com/citations?user=Jo7TvUMAAAAJ&hl=en",
-  "updated": "2026-09-20T12:29:25Z",
-  "citations": 170,
-  "citations_recent": 170,
+  "updated": "2026-09-23T12:48:50Z",
+  "citations": 171,
+  "citations_recent": 171,
   "h_index": 4,
   "h_index_recent": 4,
   "i10_index": 4,
@@ -25,7 +25,7 @@
     },
     {
       "title": "DriveAgent-R1: Advancing VLM-based Autonomous Driving with Active Perception and Hybrid Thinking",
-      "citations": 26,
+      "citations": 27,
       "year": 2025,
       "scholar_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=Jo7TvUMAAAAJ&citation_for_view=Jo7TvUMAAAAJ:2osOgNQ5qMEC",
       "cited_by_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=5635847788066915044,13273096394978228899"
