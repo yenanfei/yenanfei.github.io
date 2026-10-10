@@ -1,9 +1,9 @@
 {
   "user": "Jo7TvUMAAAAJ",
   "url": "https://scholar.google.com/citations?user=Jo7TvUMAAAAJ&hl=en",
-  "updated": "2026-10-04T13:18:30Z",
-  "citations": 175,
-  "citations_recent": 175,
+  "updated": "2026-10-10T13:51:18Z",
+  "citations": 176,
+  "citations_recent": 176,
   "h_index": 4,
   "h_index_recent": 4,
   "i10_index": 4,
@@ -36,6 +36,13 @@
       "year": 2024,
       "scholar_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=Jo7TvUMAAAAJ&citation_for_view=Jo7TvUMAAAAJ:u-x6o8ySG0sC",
       "cited_by_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=4557688102627458029"
+    },
+    {
+      "title": "MachEmbodied-U0: Unified Understanding and Generation Model for Embodied Intelligence",
+      "citations": 1,
+      "year": 2026,
+      "scholar_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=Jo7TvUMAAAAJ&citation_for_view=Jo7TvUMAAAAJ:zYLM7Y9cAGgC",
+      "cited_by_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=4423547314275399969"
     },
     {
       "title": "CRAFT: Counterfactual-to-Interactive Reinforcement Fine-Tuning for Driving Policies",
