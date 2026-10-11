@@ -4,4 +4,6 @@
 
 - [ModaLink: Unifying Modalities for Efficient Image-to-PointCloud Place Recognition](https://arxiv.org/abs/2403.18762). IROS 2024. [Paper](https://doi.org/10.1109/IROS58592.2024.10801556) [Code](https://github.com/haomo-ai/ModaLink) [Scholar](https://scholar.google.com/citations?view_op=view_citation&hl=en&user=Jo7TvUMAAAAJ&citation_for_view=Jo7TvUMAAAAJ:u-x6o8ySG0sC)
 
-- [CRAFT: Counterfactual-to-Interactive Reinforcement Fine-Tuning for Driving Policies](https://arxiv.org/abs/2605.04470). arXiv 2026. [Paper](https://arxiv.org/abs/2605.04470) [Project](https://currychen77.github.io/CRAFT/) [Scholar](https://scholar.google.com/citations?view_op=view_citation&hl=en&user=Jo7TvUMAAAAJ&citation_for_view=Jo7TvUMAAAAJ:IjCSPb-OGe4C)
+- [CRAFT: Counterfactual-to-Interactive Reinforcement Fine-Tuning for Driving Policies](https://arxiv.org/abs/2605.04470). NeurIPS 2026. [Paper](https://arxiv.org/abs/2605.04470) [Code](https://github.com/CurryChen77/CraftPolicy) [Project](https://currychen77.github.io/CRAFT/) [Scholar](https://scholar.google.com/citations?view_op=view_citation&hl=en&user=Jo7TvUMAAAAJ&citation_for_view=Jo7TvUMAAAAJ:IjCSPb-OGe4C)
+
+- [MachEmbodied-U0: Unified Understanding and Generation Model for Embodied Intelligence](https://arxiv.org/abs/2609.25627). arXiv 2026. [Paper](https://arxiv.org/abs/2609.25627) [Code](https://github.com/MachEmbodied/ME-U0) [Project](https://machembodied.com/ME-U/ME-U0.html) [Scholar](https://scholar.google.com/citations?view_op=view_citation&hl=en&user=Jo7TvUMAAAAJ&citation_for_view=Jo7TvUMAAAAJ:zYLM7Y9cAGgC)
