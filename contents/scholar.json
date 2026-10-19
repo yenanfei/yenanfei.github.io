@@ -1,9 +1,9 @@
 {
   "user": "Jo7TvUMAAAAJ",
   "url": "https://scholar.google.com/citations?user=Jo7TvUMAAAAJ&hl=en",
-  "updated": "2026-10-10T13:51:18Z",
-  "citations": 176,
-  "citations_recent": 176,
+  "updated": "2026-10-19T14:45:42Z",
+  "citations": 177,
+  "citations_recent": 177,
   "h_index": 4,
   "h_index_recent": 4,
   "i10_index": 4,
@@ -11,7 +11,7 @@
   "papers": [
     {
       "title": "The robodrive challenge: Drive anytime anywhere in any condition",
-      "citations": 72,
+      "citations": 73,
       "year": 2024,
       "scholar_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=Jo7TvUMAAAAJ&citation_for_view=Jo7TvUMAAAAJ:d1gkVwhDpl0C",
       "cited_by_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=12209825490286160914"
