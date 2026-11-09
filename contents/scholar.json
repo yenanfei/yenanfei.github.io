@@ -1,9 +1,9 @@
 {
   "user": "Jo7TvUMAAAAJ",
   "url": "https://scholar.google.com/citations?user=Jo7TvUMAAAAJ&hl=en",
-  "updated": "2026-10-30T14:20:26Z",
-  "citations": 180,
-  "citations_recent": 180,
+  "updated": "2026-11-09T17:40:00Z",
+  "citations": 183,
+  "citations_recent": 183,
   "h_index": 4,
   "h_index_recent": 4,
   "i10_index": 4,
@@ -11,7 +11,7 @@
   "papers": [
     {
       "title": "The robodrive challenge: Drive anytime anywhere in any condition",
-      "citations": 73,
+      "citations": 74,
       "year": 2024,
       "scholar_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=Jo7TvUMAAAAJ&citation_for_view=Jo7TvUMAAAAJ:d1gkVwhDpl0C",
       "cited_by_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=12209825490286160914"
@@ -25,7 +25,7 @@
     },
     {
       "title": "DriveAgent-R1: Advancing VLM-based Autonomous Driving with Active Perception and Hybrid Thinking",
-      "citations": 32,
+      "citations": 33,
       "year": 2025,
       "scholar_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=Jo7TvUMAAAAJ&citation_for_view=Jo7TvUMAAAAJ:2osOgNQ5qMEC",
       "cited_by_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=5635847788066915044,13273096394978228899"
@@ -38,18 +38,18 @@
       "cited_by_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=4557688102627458029"
     },
     {
+      "title": "CRAFT: Counterfactual-to-Interactive Reinforcement Fine-Tuning for Driving Policies",
+      "citations": 2,
+      "year": 2026,
+      "scholar_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=Jo7TvUMAAAAJ&citation_for_view=Jo7TvUMAAAAJ:IjCSPb-OGe4C",
+      "cited_by_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=10739128451494817430"
+    },
+    {
       "title": "MachEmbodied-U0: Unified Understanding and Generation Model for Embodied Intelligence",
       "citations": 1,
       "year": 2026,
       "scholar_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=Jo7TvUMAAAAJ&citation_for_view=Jo7TvUMAAAAJ:zYLM7Y9cAGgC",
       "cited_by_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=4423547314275399969"
-    },
-    {
-      "title": "CRAFT: Counterfactual-to-Interactive Reinforcement Fine-Tuning for Driving Policies",
-      "citations": 1,
-      "year": 2026,
-      "scholar_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=Jo7TvUMAAAAJ&citation_for_view=Jo7TvUMAAAAJ:IjCSPb-OGe4C",
-      "cited_by_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=10739128451494817430"
     }
   ]
 }
