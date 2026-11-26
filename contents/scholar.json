@@ -1,9 +1,9 @@
 {
   "user": "Jo7TvUMAAAAJ",
   "url": "https://scholar.google.com/citations?user=Jo7TvUMAAAAJ&hl=en",
-  "updated": "2026-11-24T18:57:36Z",
-  "citations": 188,
-  "citations_recent": 188,
+  "updated": "2026-11-26T17:47:06Z",
+  "citations": 189,
+  "citations_recent": 189,
   "h_index": 4,
   "h_index_recent": 4,
   "i10_index": 4,
@@ -32,7 +32,7 @@
     },
     {
       "title": "Modalink: Unifying modalities for efficient image-to-pointcloud place recognition",
-      "citations": 12,
+      "citations": 13,
       "year": 2024,
       "scholar_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=Jo7TvUMAAAAJ&citation_for_view=Jo7TvUMAAAAJ:u-x6o8ySG0sC",
       "cited_by_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=4557688102627458029"
