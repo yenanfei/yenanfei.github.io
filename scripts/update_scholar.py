@@ -164,7 +164,11 @@ def main() -> int:
     if source:
         body = Path(source).read_text(encoding="utf-8", errors="replace")
     else:
-        body = fetch_with_retries()
+        try:
+            body = fetch_with_retries()
+        except RuntimeError as exc:
+            print(f"Warning: {exc}; keeping last good scholar.json", file=sys.stderr)
+            return 0
 
     data = parse_scholar(body)
     OUT_PATH.parent.mkdir(parents=True, exist_ok=True)
